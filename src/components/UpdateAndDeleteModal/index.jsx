@@ -5,31 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { TechsContext } from "../../contexts/TechsContext";
 import { formSchemaUpdateAndDelete } from "../../validations/updateAndDeleteTechs";
-import { api } from "../../services";
+import { LoadingAnimation } from "../LoadingAnimation";
 
 export const UpdateAndDeleteModal = () => {
-  const { setIsUpdateAndDeleteModalActive, techName, techId } =
+  const { setIsUpdateAndDeleteModalActive, techName, loadingUpdate, loadingDelete, handleUpdateTechs, handleAndDeleteTechs } =
     useContext(TechsContext);
-
-  const handleUpdateTechs = async (data) => {
-    try {
-      const updateTechs = await api.put(`users/techs/${techId}`, data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsUpdateAndDeleteModalActive(false);
-    }
-  };
-
-  const handleAndDeleteTechs = async () => {
-    try {
-      const deleteTechs = await api.delete(`users/techs/${techId}`);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsUpdateAndDeleteModalActive(false);
-    }
-  };
 
   const {
     register,
@@ -59,8 +39,8 @@ export const UpdateAndDeleteModal = () => {
             </select>
             <p>{errors.status?.message}</p>
             <div className="buttons">
-              <button type="submit">Salvar alterações</button>
-              <span onClick={() => handleAndDeleteTechs()}>Excluir</span>
+              <button disabled={loadingUpdate} type="submit">{ loadingUpdate ? <LoadingAnimation/> : "Salvar alterações"}</button>
+              <span disabled={loadingDelete} onClick={() => handleAndDeleteTechs()}>{ loadingDelete ? <LoadingAnimation/> : "Excluir"}</span>
             </div>
           </form>
         </div>

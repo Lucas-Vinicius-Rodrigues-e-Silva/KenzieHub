@@ -6,19 +6,11 @@ import { formSchemaNewTech } from "../../validations/newTech";
 import { api } from "../../services";
 import { useContext } from "react";
 import { TechsContext } from "../../contexts/TechsContext";
+import { LoadingAnimation } from "../LoadingAnimation";
+
 
 export const TechModal = () => {
-  const { setNewTechs, setIsNewTechModalActive } = useContext(TechsContext);
-  const handleNewTech = async (data) => {
-    try {
-      const response = await api.post("users/techs", data);
-      setNewTechs(response);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsNewTechModalActive(false);
-    }
-  };
+  const { setIsNewTechModalActive, loading, handleNewTech } = useContext(TechsContext);
 
   const {
     register,
@@ -53,7 +45,7 @@ export const TechModal = () => {
               <option>Avançado</option>
             </select>
             <p>{errors.status?.message}</p>
-            <button type="submit">Cadastrar Tecnologia</button>
+            <button disabled={loading} type="submit">{loading ? <LoadingAnimation/> : "Cadastrar tecnologia"}</button>
           </form>
         </div>
       </div>

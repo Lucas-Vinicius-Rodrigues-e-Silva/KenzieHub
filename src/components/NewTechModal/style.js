@@ -25,10 +25,11 @@ export const Modal = styled.div`
     height: 342px;
     width: 369px;
 
-    
     background: var(--color-grey-3);
 
     border-radius: 4px;
+
+    animation: showModal 2s;
   }
 
   .content > form {
@@ -58,7 +59,7 @@ export const Modal = styled.div`
 
       font-weight: 400;
       font-size: 14px;
-      padding:12px;
+      padding: 12px;
 
       border-radius: 4px;
     }
@@ -76,7 +77,7 @@ export const Modal = styled.div`
 
       font-weight: 400;
       font-size: 14px;
-      padding:12px;
+      padding: 12px;
 
       border-radius: 4px;
     }
@@ -136,10 +137,23 @@ export const Modal = styled.div`
     }
   }
 
-
   @media (max-width: 400px) {
     .content {
-      width:90%;
+      width: 90%;
     }
-}
+  }
+
+  @keyframes showModal {
+    0% {
+      transform: translateX(-900px) translateY(250px);
+      height: 1px;
+      width: 1px;
+    }
+
+    100% {
+      transform: translateX(0px) translateY(0px);
+      height: 342px;
+      width: 369px;
+    }
+  }
 `;

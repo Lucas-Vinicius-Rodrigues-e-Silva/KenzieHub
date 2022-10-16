@@ -127,7 +127,6 @@ const RegisterPage = () => {
           </select>
           <p>{errors.course_module?.message}</p>
           <button type="submit" disabled={loading}>
-            {" "}
             {loading ? "Cadastrando..." : "Cadastrar"}
           </button>
         </form>

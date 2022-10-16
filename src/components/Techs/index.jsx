@@ -4,13 +4,14 @@ import { TechsContext } from "../../contexts/TechsContext";
 import { StyledLi } from "./style";
 
 export const AllTechs = ({ status, title, id }) => {
-  const { isUpdateAndDeleteModalActive, setIsUpdateAndDeleteModalActive, setTechId, setTechName } =
+  const { isUpdateAndDeleteModalActive, setIsUpdateAndDeleteModalActive, setTechId, setTechName, setTechStatus } =
     useContext(TechsContext);
 
     function defineStates() {
       setIsUpdateAndDeleteModalActive(true) 
       setTechId(id)
       setTechName(title)
+      setTechStatus(status)
     }
 
   return (

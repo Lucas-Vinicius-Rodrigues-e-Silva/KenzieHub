@@ -28,6 +28,8 @@ export const StyledUpdateAndDeleteModal = styled.div`
     background: var(--color-grey-3);
 
     border-radius: 4px;
+
+    animation: showModal 2s;
   }
 
   .update-and-delete-main > form {
@@ -167,6 +169,10 @@ export const StyledUpdateAndDeleteModal = styled.div`
     transition: 0.25s;
 
     > button {
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
       height: 100%;
       width: 65%;
 
@@ -218,4 +224,18 @@ export const StyledUpdateAndDeleteModal = styled.div`
       width:90%;
     }
 }
+
+@keyframes showModal {
+    0% {
+      transform: translateX(-900px) translateY(250px);
+      height: 1px;
+      width: 1px;
+    }
+
+    100% {
+      transform: translateX(0px) translateY(0px);
+      height: 342px;
+      width: 369px;
+    }
+  }
 `;

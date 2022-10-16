@@ -3,7 +3,7 @@ import { api } from "../services";
 import { useNavigate } from "react-router-dom";
 import { sucessToast } from "../components/SucessToast";
 import { errorToast } from "../components/ErrorToast";
-export const AuthContext = createContext({}); 
+export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
@@ -33,12 +33,9 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       const response = await api.post("sessions", data);
       const { user: userResponse, token } = response.data;
-
       api.defaults.headers.authorization = `Bearer ${token}`;
       setUser(userResponse);
-
       localStorage.setItem("kenzieHubToken", token);
-
       sucessToast("Login feito com sucesso!");
       navigate("/dashboard", { replace: true });
     } catch (error) {
