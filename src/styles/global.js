@@ -32,6 +32,7 @@ input, select{
     --color-primary: #FF577F;
     --color-primary-focus: #FF427F;
     --color-primary-negative: #59323F;
+    --color-overlay-modal:rgba(0,0,0, .35);
     --color-grey-4: #121214;
     --color-grey-3: #212529;
     --color-grey-2: #343B41;

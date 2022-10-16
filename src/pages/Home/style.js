@@ -11,7 +11,7 @@ export const StyledSection = styled.section`
   animation: showing 2s;
 
   .main-img {
-    object-fit: cover;
+    object-fit: scale-down;
     height: 80%;
     width: 60%;
   }

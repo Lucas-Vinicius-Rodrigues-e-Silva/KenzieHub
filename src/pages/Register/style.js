@@ -26,6 +26,9 @@ export const StyledDiv = styled.div`
     animation: show-info 2s;
   }
 
+  > form > p {
+    color: var(--color-grey-0);
+  }
   > form > div {
     display: flex;
     flex-direction: column;
@@ -57,7 +60,7 @@ export const StyledDiv = styled.div`
 
   > form > input {
     width: 80%;
-    height: 10%;
+    height: 7%;
 
     border-radius: 4px;
 
@@ -65,6 +68,16 @@ export const StyledDiv = styled.div`
     color: var(--color-grey-1);
 
     margin-top: 1rem;
+
+    padding: 10px;
+
+    outline: none;
+    border: 2px solid var(--color-grey-2);
+  }
+
+  > form > input:focus {
+    background-color: var(--color-grey-2);
+    border-color: var(--color-grey-0);
   }
 
   .reveal-input {
@@ -72,9 +85,10 @@ export const StyledDiv = styled.div`
     flex-direction: row;
 
     width: 80%;
+    height: 10%;
 
     background-color: var(--color-grey-2);
-    
+
     border-radius: 4px;
   }
 
@@ -83,6 +97,15 @@ export const StyledDiv = styled.div`
     height: 100%;
 
     color: var(--color-grey-1);
+
+    outline: none;
+
+    border: 2px solid var(--color-grey-2);
+    border-radius: 4px;
+  }
+
+  .reveal-input > input:focus {
+    border-color: var(--color-grey-0);
   }
 
   .reveal-input > span {
@@ -96,7 +119,7 @@ export const StyledDiv = styled.div`
 
   > form > select {
     width: 80%;
-    height: 10%;
+    height: 7%;
 
     border-radius: 4px;
 
@@ -105,6 +128,16 @@ export const StyledDiv = styled.div`
 
     margin-bottom: 1rem;
     margin-top: 1rem;
+
+    padding: 10px;
+
+    outline: none;
+    border: 2px solid var(--color-grey-2);
+  }
+
+  > form > select:focus {
+    background-color: var(--color-grey-2);
+    border-color: var(--color-grey-0);
   }
 
   > form > button {

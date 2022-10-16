@@ -91,39 +91,77 @@ export const StyledDivDashboard = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
 
     width: 70%;
-    height: 20%;
+    height: 80%;
   }
 
   > section > main > div {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
 
     width: 100%;
-    height: 60%;
+    height: 10%;
+
+    margin-top:2rem;
   }
 
   > section > main > div > h2 {
     color: var(--color-grey-0);
   }
 
-  > section > main > div > p {
+  > section > main > div > button {
+    height: 100%;
+
+    color: var(--color-grey-1);
+
+    transition: 0.25s;
+  }
+
+  > section > main > div > button:hover {
     color: var(--color-grey-0);
   }
 
+  > section > main > ul {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    background-color:var(--color-grey-3);
+    margin-top:2rem;
+
+    width:100%;
+    height:70%;
+
+    overflow-y:scroll;
+    border-radius:4px;
+  }
+
+  
+  > section > main > ul::-webkit-scrollbar {
+  width: 4px;     
+}
+
+> section > main > ul::-webkit-scrollbar-track {
+  background: var(--color-grey-2);      
+}
+
+> section > main > ul::-webkit-scrollbar-thumb {
+  background-color: var(--color-grey-1);    
+  border-radius: 4px;      
+}
+
   @media (max-width: 1300px) {
     > section > main {
-    height: 30%;
+    height: 90%;
   }
   }
 
   @media (max-width: 700px) {
     > section > main {
-    height: 40%;
+    height: 90%;
   }
 }
 `

@@ -1,4 +1,4 @@
-import mainImage from "../../img/MainImg.png";
+import mainImage from "../../img/MainImg.gif";
 import { StyledSection } from "./style";
 import { motion } from "framer-motion";
 

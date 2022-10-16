@@ -25,6 +25,6 @@ export const formSchema = yup.object().shape({
   bio: yup.string().required("A bio é obrigatória!"),
   contact: yup
     .string("O contato deve ser composto apenas por números!")
-    .required("O telefone de contato é obrigatório!"),
+    .required("O contato é obrigatório!"),
   course_module: yup.string().required("O módulo é obrigatório!"),
 });
