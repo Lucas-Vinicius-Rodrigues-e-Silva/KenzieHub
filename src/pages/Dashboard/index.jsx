@@ -8,15 +8,16 @@ import { TechModal } from "../../components/NewTechModal";
 import { TechsContext } from "../../contexts/TechsContext";
 import { AllTechs } from "../../components/Techs";
 import { NoTechs } from "../../components/NoTechs";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const Dashboard = () => {
   const {
     user,
     exit,
-    userTechs,
     setIsNewTechModalActive,
     isNewTechModalActive,
   } = useContext(TechsContext);
+  const {techs} = useContext(AuthContext)
   return (
     <>
       {user ? (
@@ -48,8 +49,8 @@ export const Dashboard = () => {
                   </button>
                 </div>
                 {isNewTechModalActive && <TechModal />}
-                { userTechs.length === 0 ? <NoTechs/> :  <ul>
-                  {userTechs.map(({ id, status, title }) => (
+                { techs.length === 0 ? <NoTechs/> :  <ul>
+                  {techs.map(({ id, status, title }) => (
                     <AllTechs key={id} id={id} status={status} title={title} />
                   ))}
                 </ul>}

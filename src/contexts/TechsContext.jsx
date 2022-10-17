@@ -7,29 +7,17 @@ import { errorToast } from "../components/ErrorToast";
 export const TechsContext = createContext({});
 
 export const TechsProvider = ({ children }) => {
-  const { user, navigate, userLoading, setUser } = useContext(AuthContext);
+  const { user, navigate, userLoading, setUser, techs, setTechs } =
+    useContext(AuthContext);
   const [isUpdateAndDeleteModalActive, setIsUpdateAndDeleteModalActive] =
     useState(false);
-  const [userTechs, setUserTechs] = useState([]);
   const [isNewTechModalActive, setIsNewTechModalActive] = useState(false);
-  const [techId, setTechId] = useState("")
-  const [techName, setTechName] = useState("")
-  const [techStatus, setTechStatus] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [loadingDelete, setLoadingDelete] = useState(false)
-  const [loadingUpdate, setLoadingUpdate] = useState(false)
-
-  useEffect(() => {
-    async function requestUserTechs() {
-      try {
-        const response = await api.get("profile");
-        setUserTechs(response.data.techs);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    requestUserTechs();
-  }, [userTechs]);
+  const [techId, setTechId] = useState("");
+  const [techName, setTechName] = useState("");
+  const [techStatus, setTechStatus] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false);
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
 
   const exit = () => {
     setUser(null);
@@ -43,47 +31,62 @@ export const TechsProvider = ({ children }) => {
 
   const handleNewTech = async (data) => {
     try {
-      setLoading(true)
-      const response = await api.post("users/techs", data);
-      sucessToast("Tecnologia adicionada com sucesso!")
+      setLoading(true);
+      const newTech = await api.post("users/techs", data);
+      console.log(newTech.data);
+      setTechs([...techs, newTech.data]);
+      sucessToast("Tecnologia adicionada com sucesso!");
     } catch (error) {
       console.log(error);
-      errorToast("Não foi possível adicionar a tecnologia. Aguarde e tente novamente.")
+      errorToast(
+        "Não foi possível adicionar a tecnologia. Aguarde e tente novamente."
+      );
     } finally {
-      setLoading(false)
+      setLoading(false);
       setIsNewTechModalActive(false);
     }
   };
 
   const handleUpdateTechs = async (data) => {
     try {
-      setLoadingUpdate(true)
-      if(data.status === techStatus) {
-        errorToast("O nível de tecnlogia deve ser diferente do atual!")
+      setLoadingUpdate(true);
+      if (data.status === techStatus) {
+        errorToast("O nível de tecnlogia deve ser diferente do atual!");
         setIsUpdateAndDeleteModalActive(false);
       } else {
-      const updateTechs = await api.put(`users/techs/${techId}`, data);
-      sucessToast("Tecnologia atualizada com sucesso!")
-    }
+        const updateTechs = await api.put(`users/techs/${techId}`, data);
+        const techToUpdate = techs.find((tech) => tech.id === techId);
+        const IndexOfTechToUpdate = techs.indexOf(techToUpdate);
+        techs.splice(IndexOfTechToUpdate, 1);
+        setTechs([...techs, updateTechs.data]);
+        sucessToast("Tecnologia atualizada com sucesso!");
+      }
     } catch (error) {
       console.log(error);
-      errorToast("Não foi possível atualizar a tecnologia. Aguarde e tente novamente.")
+      errorToast(
+        "Não foi possível atualizar a tecnologia. Aguarde e tente novamente."
+      );
     } finally {
-      setLoadingUpdate(false)
+      setLoadingUpdate(false);
       setIsUpdateAndDeleteModalActive(false);
     }
   };
 
-  const handleAndDeleteTechs = async () => {
+  const handleAndDeleteTechs = async (data) => {
     try {
-      setLoadingDelete(true)
+      setLoadingDelete(true);
       const deleteTechs = await api.delete(`users/techs/${techId}`);
-      sucessToast("Tecnologia deletada com sucesso!")
+      const techToDelete = techs.find((tech) => tech.id === techId);
+      const IndexOfTechToDelete = techs.indexOf(techToDelete);
+      techs.splice(IndexOfTechToDelete, 1);
+      sucessToast("Tecnologia deletada com sucesso!");
     } catch (error) {
       console.log(error);
-      errorToast("Não foi possível deletar a tecnologia. Aguarde e tente novamente.")
+      errorToast(
+        "Não foi possível deletar a tecnologia. Aguarde e tente novamente."
+      );
     } finally {
-      setLoadingDelete(false)
+      setLoadingDelete(false);
       setIsUpdateAndDeleteModalActive(false);
     }
   };
@@ -95,7 +98,6 @@ export const TechsProvider = ({ children }) => {
         setIsUpdateAndDeleteModalActive,
         user,
         exit,
-        userTechs,
         setIsNewTechModalActive,
         isNewTechModalActive,
         techId,
@@ -112,7 +114,7 @@ export const TechsProvider = ({ children }) => {
         loadingUpdate,
         handleUpdateTechs,
         handleAndDeleteTechs,
-        handleNewTech
+        handleNewTech,
       }}
     >
       {children}

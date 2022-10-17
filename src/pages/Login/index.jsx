@@ -10,7 +10,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { LoadingPage } from "../../components/Loading";
 const LoginPage = () => {
-  const {handleSubmitFunction, loading} = useContext(AuthContext)
+  const {handleLoginUser, loading} = useContext(AuthContext)
   const [seePassword, setSeePassword] = useState("password");
 
   const {
@@ -28,7 +28,7 @@ const LoginPage = () => {
   >
     { loading ? <LoadingPage/> :
     <StyledDivLogin>
-      <form onSubmit={handleSubmit(handleSubmitFunction)}>
+      <form onSubmit={handleSubmit(handleLoginUser)}>
         <p>Login</p>
         <input
           type="text"

@@ -11,7 +11,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { LoadingPage } from "../../components/Loading";
 
 const RegisterPage = () => {
-  const { handleSubmitFormFunction, loading } = useContext(AuthContext);
+  const { handleRegisterUser, loading } = useContext(AuthContext);
   const [seePassword, setSeePassword] = useState("password");
   const [seeConfirmPassword, setSeeConfirmPassword] = useState("password");
   const {
@@ -31,7 +31,7 @@ const RegisterPage = () => {
     >
       { loading ? <LoadingPage/> :
       <StyledDiv>
-        <form onSubmit={handleSubmit(handleSubmitFormFunction)}>
+        <form onSubmit={handleSubmit(handleRegisterUser)}>
           <div>
             <h2>Crie sua conta</h2>
             <p>Rápido e grátis. Vamos nessa!</p>

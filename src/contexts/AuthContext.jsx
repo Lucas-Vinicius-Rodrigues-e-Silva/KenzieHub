@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [userLoading, setUserLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [techs, setTechs] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,6 +20,7 @@ export const AuthProvider = ({ children }) => {
           api.defaults.headers.authorization = `Bearer ${token}`;
           const { data } = await api.get("profile");
           setUser(data);
+          setTechs(data.techs);
         } catch (error) {
           console.log(error);
         }
@@ -28,13 +30,14 @@ export const AuthProvider = ({ children }) => {
     loadUser();
   }, []);
 
-  const handleSubmitFunction = async (data) => {
+  const handleLoginUser = async (data) => {
     try {
       setLoading(true);
       const response = await api.post("sessions", data);
       const { user: userResponse, token } = response.data;
       api.defaults.headers.authorization = `Bearer ${token}`;
       setUser(userResponse);
+      setTechs(userResponse.techs);
       localStorage.setItem("kenzieHubToken", token);
       sucessToast("Login feito com sucesso!");
       navigate("/dashboard", { replace: true });
@@ -47,7 +50,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const handleSubmitFormFunction = async (data) => {
+  const handleRegisterUser = async (data) => {
     try {
       setLoading(true);
       const response = await api.post("users", data);
@@ -64,13 +67,15 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        handleSubmitFunction,
+        handleLoginUser,
         loading,
         setUser,
         user,
         navigate,
         userLoading,
-        handleSubmitFormFunction,
+        handleRegisterUser,
+        setTechs,
+        techs,
       }}
     >
       {children}
