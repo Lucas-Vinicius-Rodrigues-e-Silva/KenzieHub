@@ -3,11 +3,16 @@ import { useContext } from "react";
 import { TechsContext } from "../../contexts/TechsContext";
 import { StyledLi } from "./style";
 
-export const AllTechs = ({ status, title, id }) => {
-  const { isUpdateAndDeleteModalActive, setIsUpdateAndDeleteModalActive, setTechId, setTechName, setTechStatus } =
-    useContext(TechsContext);
+export interface IAllTechsProps {
+  status: string;
+  title: string;
+  id: string;
+}
 
-    function defineStates() {
+export const AllTechs = ({ status, title, id }: IAllTechsProps) => {
+  const { isUpdateAndDeleteModalActive, setIsUpdateAndDeleteModalActive, setTechId, setTechName, setTechStatus } = useContext(TechsContext);
+
+    function defineStates() : void {
       setIsUpdateAndDeleteModalActive(true) 
       setTechId(id)
       setTechName(title)
@@ -16,7 +21,7 @@ export const AllTechs = ({ status, title, id }) => {
 
   return (
     <>
-      <StyledLi onClick={ defineStates}>
+      <StyledLi onClick={defineStates}>
         <h4>{title}</h4>
         <span>{status}</span>
       </StyledLi>

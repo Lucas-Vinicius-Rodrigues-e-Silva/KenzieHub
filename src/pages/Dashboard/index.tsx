@@ -6,17 +6,19 @@ import { Navigate } from "react-router-dom";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { TechModal } from "../../components/NewTechModal";
 import { TechsContext } from "../../contexts/TechsContext";
-import { AllTechs } from "../../components/Techs";
+import { AllTechs, IAllTechsProps } from "../../components/Techs";
 import { NoTechs } from "../../components/NoTechs";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export const Dashboard = () => {
   const {
-    user,
     exit,
     setIsNewTechModalActive,
     isNewTechModalActive,
   } = useContext(TechsContext);
+  const {
+    user,
+  } = useContext(AuthContext);
   const {techs} = useContext(AuthContext)
   return (
     <>
@@ -49,8 +51,8 @@ export const Dashboard = () => {
                   </button>
                 </div>
                 {isNewTechModalActive && <TechModal />}
-                { techs.length === 0 ? <NoTechs/> :  <ul>
-                  {techs.map(({ id, status, title }) => (
+                { techs?.length === 0 ? <NoTechs/> :  <ul>
+                  {techs?.map(({ id, status, title }: IAllTechsProps) => (
                     <AllTechs key={id} id={id} status={status} title={title} />
                   ))}
                 </ul>}

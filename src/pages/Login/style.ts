@@ -13,7 +13,8 @@ export const StyledDivLogin = styled.div`
   animation: show-info 2s;
 
   > form > p {
-    color: var(--color-grey-0);
+    color: var(--color-primary);
+    max-height:10px;
   }
 
   > form {

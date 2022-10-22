@@ -9,7 +9,7 @@ function App() {
       <GlobalStyle />
       <Toaster position="top-right" reverseOrder={false} />
       <AuthProvider>
-          <Application />
+        <Application />
       </AuthProvider>
     </>
   );

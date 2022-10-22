@@ -1,5 +1,5 @@
 import { toast } from "react-hot-toast";
-export function errorToast(message) {
+export function errorToast(message:string) {
     toast.error(
         message,
         {

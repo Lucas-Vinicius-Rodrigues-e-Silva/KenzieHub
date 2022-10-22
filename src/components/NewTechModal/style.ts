@@ -32,6 +32,11 @@ export const Modal = styled.div`
     animation: showModal 2s;
   }
 
+  .content > form > p {
+    color:var(--color-primary);
+    max-height:10px;
+  }
+
   .content > form {
     display: flex;
     flex-direction: column;
@@ -39,9 +44,8 @@ export const Modal = styled.div`
     align-items: center;
 
     height: 85%;
-    width: 100%;
 
-    label {
+    > label {
       width: 90%;
 
       color: var(--color-grey-0);

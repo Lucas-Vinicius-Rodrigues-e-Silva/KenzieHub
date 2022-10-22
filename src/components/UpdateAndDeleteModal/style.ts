@@ -168,7 +168,7 @@ export const StyledUpdateAndDeleteModal = styled.div`
 
     transition: 0.25s;
 
-    > button {
+    .update-button {
       display:flex;
       justify-content:center;
       align-items:center;
@@ -188,13 +188,13 @@ export const StyledUpdateAndDeleteModal = styled.div`
       transition: 0.25s;
     }
 
-    > button:hover {
+    .update-button:hover {
       transition: 0.25s;
 
       background-color: var(--color-primary);
     }
 
-    > span {
+    .delete-button {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -211,7 +211,7 @@ export const StyledUpdateAndDeleteModal = styled.div`
       transition:0.25s
     }
 
-    >span:hover {
+    .delete-button:hover {
       transition:0.25s;
 
       background-color:var(--color-grey-1)

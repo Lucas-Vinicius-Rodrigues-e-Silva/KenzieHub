@@ -7,15 +7,23 @@ import { TechsContext } from "../../contexts/TechsContext";
 import { formSchemaUpdateAndDelete } from "../../validations/updateAndDeleteTechs";
 import { LoadingAnimation } from "../LoadingAnimation";
 
-export const UpdateAndDeleteModal = () => {
-  const { setIsUpdateAndDeleteModalActive, techName, loadingUpdate, loadingDelete, handleUpdateTechs, handleAndDeleteTechs } =
-    useContext(TechsContext);
+export interface IUpdateTechData {
+  status: string;
+}
 
+export const UpdateAndDeleteModal = () => {
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(formSchemaUpdateAndDelete) });
+    setIsUpdateAndDeleteModalActive,
+    techName,
+    loadingUpdate,
+    loadingDelete,
+    handleUpdateTechs,
+    handleAndDeleteTechs,
+  } = useContext(TechsContext);
+
+  const { register, handleSubmit, formState: { errors }, } = useForm<IUpdateTechData>({
+    resolver: yupResolver(formSchemaUpdateAndDelete),
+  });
 
   return (
     <StyledUpdateAndDeleteModal>
@@ -32,15 +40,27 @@ export const UpdateAndDeleteModal = () => {
               <h3>{techName}</h3>
             </div>
             <label>Selecionar status</label>
-            <select name="status" id="status" {...register("status")}>
+            <select id="status" {...register("status")}>
               <option>Iniciante</option>
               <option>Intermediário</option>
               <option>Avançado</option>
             </select>
             <p>{errors.status?.message}</p>
             <div className="buttons">
-              <button disabled={loadingUpdate} type="submit">{ loadingUpdate ? <LoadingAnimation/> : "Salvar alterações"}</button>
-              <span disabled={loadingDelete} onClick={() => handleAndDeleteTechs()}>{ loadingDelete ? <LoadingAnimation/> : "Excluir"}</span>
+              <button
+                className="update-button"
+                disabled={loadingUpdate}
+                type="submit"
+              >
+                {loadingUpdate ? <LoadingAnimation /> : "Salvar alterações"}
+              </button>
+              <button
+                className="delete-button"
+                disabled={loadingDelete}
+                onClick={() => handleAndDeleteTechs()}
+              >
+                {loadingDelete ? <LoadingAnimation /> : "Excluir"}
+              </button>
             </div>
           </form>
         </div>

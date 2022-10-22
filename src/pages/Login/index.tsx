@@ -7,7 +7,7 @@ import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext, ILoginUser } from "../../contexts/AuthContext";
 import { LoadingPage } from "../../components/Loading";
 const LoginPage = () => {
   const {handleLoginUser, loading} = useContext(AuthContext)
@@ -17,7 +17,7 @@ const LoginPage = () => {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm({resolver: yupResolver(formSchemaLogin)});
+  } = useForm<ILoginUser>({resolver: yupResolver(formSchemaLogin)});
 
   return (
     <motion.div

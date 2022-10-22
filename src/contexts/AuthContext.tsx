@@ -1,20 +1,75 @@
-import { createContext, useEffect, useState } from "react";
-import { api } from "../services";
-import { useNavigate } from "react-router-dom";
+import { createContext, ReactNode, useEffect, useState } from "react";
+import { api } from "../services/api";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { sucessToast } from "../components/SucessToast";
 import { errorToast } from "../components/ErrorToast";
-export const AuthContext = createContext({});
 
-export const AuthProvider = ({ children }) => {
+interface IUserTechs{
+  created_at: string;
+  id: string;
+  status: string;
+  title: string;
+  updated_at: string;
+}
+
+interface IUser {
+  avatar_url: null | string;
+  bio: string;
+  contact: string;
+  course_module: string;
+  created_at: string;
+  email: string;
+  id: string;
+  name: string;
+  techs: IUserTechs[] | [];
+  updated_at: string;
+  works: [];
+}
+
+interface IAuthProviderProps {
+  children: ReactNode;
+}
+
+ export interface ILoginUser {
+  email: string;
+  password: string;
+}
+
+export interface IRegisterUser {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  bio: string;
+  contact: string;
+  course_module: string;
+}
+
+interface IAuthContext {
+handleLoginUser: ((data: ILoginUser) => void);
+loading: true | false;
+setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
+user: IUser | null;
+navigate: NavigateFunction;
+userLoading: true | false;
+handleRegisterUser: ((data: IRegisterUser) => void);
+setTechs: React.Dispatch<React.SetStateAction<IUserTechs[] | null>>;
+techs: IUserTechs[] | null;
+}
+
+export const AuthContext = createContext({} as IAuthContext);
+
+export const AuthProvider = ({ children }: IAuthProviderProps) => {
   const [loading, setLoading] = useState(false);
   const [userLoading, setUserLoading] = useState(true);
-  const [user, setUser] = useState(null);
-  const [techs, setTechs] = useState(null);
+  const [user, setUser] = useState<IUser | null>(null);
+  const [techs, setTechs] = useState<IUserTechs[] | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function loadUser() {
       const token = localStorage.getItem("kenzieHubToken");
+      console.log(token)
       if (token) {
         try {
           api.defaults.headers.authorization = `Bearer ${token}`;
@@ -24,13 +79,15 @@ export const AuthProvider = ({ children }) => {
         } catch (error) {
           console.log(error);
         }
+      } else if (!token) {
+        navigate("/")
       }
       setUserLoading(false);
     }
     loadUser();
   }, []);
 
-  const handleLoginUser = async (data) => {
+  const handleLoginUser = async (data: ILoginUser) => {
     try {
       setLoading(true);
       const response = await api.post("sessions", data);
@@ -50,7 +107,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const handleRegisterUser = async (data) => {
+  const handleRegisterUser = async (data: IRegisterUser) => {
     try {
       setLoading(true);
       const response = await api.post("users", data);

@@ -5,7 +5,7 @@ export const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
 
-  height: 120vh;
+  height: 130vh;
   width: 100%;
 
   margin-top: 2rem;
@@ -27,8 +27,10 @@ export const StyledDiv = styled.div`
   }
 
   > form > p {
-    color: var(--color-grey-0);
+    color: var(--color-primary);
+    max-height:10px;
   }
+  
   > form > div {
     display: flex;
     flex-direction: column;
@@ -86,6 +88,8 @@ export const StyledDiv = styled.div`
 
     width: 80%;
     height: 10%;
+    
+    min-height:4.5%;
 
     background-color: var(--color-grey-2);
 
@@ -143,6 +147,8 @@ export const StyledDiv = styled.div`
   > form > button {
     width: 80%;
     height: 10%;
+
+    min-height:4.5%;
 
     background-color: var(--color-primary-negative);
     color: var(--color-grey-0);

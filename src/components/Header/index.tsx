@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import { StyledHeader } from "./style";
-import tittle from "../../img/Logo.svg";
+import tittle from "../../img/Logo.svg"
 import { motion } from "framer-motion";
 
 const Header = () => {

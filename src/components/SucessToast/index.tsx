@@ -1,5 +1,5 @@
 import { toast } from "react-hot-toast";
-export function sucessToast(message) {
+export function sucessToast(message:string) {
     toast.success(message, {
         style: {
           border: "1px solid var(--color-sucess)",
