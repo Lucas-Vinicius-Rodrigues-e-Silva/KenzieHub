@@ -12,10 +12,10 @@ Link: https://react-entrega-kenzie-hub-lucas-vinicius-rodrigues.vercel.app/
   <img align="right" alt="KenzieHub homepage" src="https://res.cloudinary.com/dvkwgt94s/image/upload/v1674234832/KenzieHub_tela_inicial_qakbip.png"/>
 </div>
 <br/>
-<div align="flex-start">
-  <img align="right" alt="KenzieHub dashboard no techs" src="https://res.cloudinary.com/dvkwgt94s/image/upload/v1674234832/KenzieHub_tela_do_usu%C3%A1rio_sem_techs_nj8g3v.png"/>
-</div>
 <br/>
-<div align="flex-start">
+  <img align="right" alt="KenzieHub dashboard no techs" src="https://res.cloudinary.com/dvkwgt94s/image/upload/v1674234832/KenzieHub_tela_do_usu%C3%A1rio_sem_techs_nj8g3v.png"/>
+<br/>
+<br/>
+<br/>
   <img align="right" alt="KenzieHub dashboard with techs" src="https://res.cloudinary.com/dvkwgt94s/image/upload/v1674234831/KenzieHub_tela_do_usu%C3%A1rio_com_techs_cua6pl.png"/>
-</div>
+<br/>
